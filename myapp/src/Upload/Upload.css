@@ -1,0 +1,13 @@
+.App {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.App > * {
+  margin: 20px;
+}
+
+h1 {
+  margin: 10px;
+}
