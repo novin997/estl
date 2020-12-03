@@ -36,7 +36,7 @@ export default function Upload() {
         <h1>Upload CSV</h1>
       </div>
       <div className="App">
-        <input type="file" onChange={fileChange} />
+        <input type="file" name="csvFile" onChange={fileChange} />
         <button onClick={uploadFile} className="upbutton">
           Upload
         </button>

@@ -1,13 +1,15 @@
 const express = require("express");
 const multer = require("multer");
+const validateCsv = require("../model/logic/validateCsv");
 
 const route = express.Router();
 const upload = multer();
 
-route.post("/upload", upload.single("uploadCSV"), (req, res) => {
-  //   console.log(req.files.file.data);
-  const csv = req.files.file.data.toString("utf8");
-  console.log(csv);
+route.post("/upload", upload.single("file"), async (req, res) => {
+  console.log(req.file);
+  const csv = req.file.buffer.toString("utf8");
+  const result = await validateCsv(csv);
+
   res.json({ msg: "Good result" });
 });
 
