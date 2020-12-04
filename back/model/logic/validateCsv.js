@@ -1,4 +1,5 @@
 const splitEasy = require("csv-split-easy");
+const Employee = require("../schema/employee");
 
 /**
  * @desc Validate the CSV File and check if it can be
@@ -9,24 +10,33 @@ const splitEasy = require("csv-split-easy");
 const validateCsv = (csvfile) => {
   return new Promise(function (resolve, reject) {
     const csv = splitEasy(csvfile);
+    const dataDB = [];
 
-    if (csv.empty()) reject(false);
-    /**
-     * not optimal 0(N)
-     */
-    csv.shift();
+    console.log(csv);
 
     csv.map((val, index) => {
       /**
-       * check if all 4 columns are filled up
-       * if not ignore line
+       * Ignore the First Row
        */
-      if (val.length === 4) {
-        if (val[3] < 0 || val[0][0] == "#") reject(false);
-      } else {
-        reject(false);
+      if (index !== 0) {
+        /**
+         * Check for comments
+         */
+        if (val[0][0] !== "#") {
+          /**
+           * Check for valid num of columns
+           */
+          if (val.length === 4) {
+            /**
+             * Check if salary is negative
+             */
+            if (val[3] >= 0.0) {
+            } else reject(`Salary at Line ${index} is negative`);
+          } else reject("Invalid Columns in CSV File");
+        } else {
+          console.log("comment");
+        }
       }
-      resolve(true);
     });
   });
 };

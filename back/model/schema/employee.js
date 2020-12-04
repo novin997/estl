@@ -16,9 +16,9 @@ const employeeSchema = new mongoose.Schema({
     required: true,
   },
   salary: {
-    type: Decimal128,
+    type: Number,
     required: true,
   },
 });
 
-module.exports(mongoose.model("Employee", employeeSchema));
+module.exports = mongoose.model("Employee", employeeSchema);
