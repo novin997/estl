@@ -1,10 +1,10 @@
-import './App.css';
-import Upload from './Upload/Upload';
+import "./App.css";
+import Upload from "./Upload/Upload";
 
 function App() {
   return (
     <div>
-      <Upload/>
+      <Upload />
     </div>
   );
 }

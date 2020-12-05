@@ -9,7 +9,7 @@ const Employee = require("../schema/employee");
  */
 
 function validateCsv(csvfile) {
-  return new Promise(function (resolve, reject) {
+  return new Promise((resolve, reject) => {
     const csv = splitEasy(csvfile);
     const dataDB = { data: [], actions: [] };
 
@@ -52,7 +52,7 @@ function validateCsv(csvfile) {
                  * we will check if there is any other user with the same login
                  */
                 const duplicateLogin = await Employee.findOne({
-                  login: duplicateId.login,
+                  login: val[1],
                 });
                 if (!duplicateLogin) {
                   dataDB.data.push({

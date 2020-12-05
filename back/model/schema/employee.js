@@ -5,11 +5,13 @@ const employeeSchema = new mongoose.Schema({
     type: String,
     required: true,
     unique: true,
+    dropDups: true,
   },
   login: {
     type: String,
     required: true,
     unique: true,
+    dropDups: true,
   },
   name: {
     type: String,

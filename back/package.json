@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "@hapi/joi": "^17.1.1",
+    "@types/node": "^14.14.10",
     "cors": "^2.8.5",
     "csv-split-easy": "^4.0.2",
     "dotenv": "^8.2.0",
