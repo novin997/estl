@@ -13,19 +13,17 @@ export default function QueryParam() {
   const [sortBy, setSortBy] = useState("id");
 
   const queryDB = async () => {
-    const url = new URL("http://localhost:3000/users");
     const sort = (sortOrder === "Ascending" ? "+" : "-").concat(sortBy);
-    const params = {
-      minSalary: minSalary,
-      maxSalary: maxSalary,
-      offset: 0,
-      limit: 30,
-      sort: sort,
-    };
-
-    url.search = new URLSearchParams(params).toString();
-    console.log(url);
-    const response = await fetch(url);
+    const response = await fetch(
+      "/users?" +
+        new URLSearchParams({
+          minSalary: minSalary,
+          maxSalary: maxSalary,
+          offset: 0,
+          limit: 30,
+          sort: sort,
+        })
+    );
     console.log(response);
   };
 
