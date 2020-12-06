@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./Upload.css";
 
 export default function Upload() {
   const [file, setFile] = useState("");
@@ -31,13 +30,19 @@ export default function Upload() {
   }
 
   return (
-    <div>
-      <div className="App">
+    <div class="p-4">
+      <div class="m-4 d-flex justify-content-center">
         <h1>Upload CSV</h1>
       </div>
-      <div className="App">
+      <div class="pl-5 m-4 d-flex justify-content-center">
         <input type="file" name="csvFile" onChange={fileChange} />
-        <button onClick={uploadFile} className="upbutton">
+      </div>
+      <div class="m-4 d-flex justify-content-center">
+        <button
+          onClick={uploadFile}
+          type="button"
+          class="btn btn-primary btn-rounded btn-sm"
+        >
           Upload
         </button>
       </div>

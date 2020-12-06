@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { MDBCol, MDBContainer, MDBDataTableV5, MDBRow } from "mdbreact";
+import QueryParam from "../QueryParam/QueryParam";
 
 export default function Table() {
   const [datatable, setDatatable] = React.useState({
@@ -139,6 +140,9 @@ export default function Table() {
   return (
     <div>
       <MDBContainer>
+        <MDBRow className="d-flex justify-content-center">
+          <QueryParam />
+        </MDBRow>
         <MDBRow>
           <MDBCol size="2"></MDBCol>
           <MDBCol size="8">
