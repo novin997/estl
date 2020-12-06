@@ -17,7 +17,7 @@ export default function Upload() {
     formData.append("file", file);
 
     try {
-      const apiPost = await fetch("http://localhost:8080/users/upload", {
+      const apiPost = await fetch("http://localhost:3000/users/upload", {
         method: "POST",
         body: formData,
       });
@@ -30,18 +30,18 @@ export default function Upload() {
   }
 
   return (
-    <div class="p-4">
-      <div class="m-4 d-flex justify-content-center">
+    <div className="p-4">
+      <div className="m-4 d-flex justify-content-center">
         <h1>Upload CSV</h1>
       </div>
-      <div class="pl-5 m-4 d-flex justify-content-center">
+      <div className="pl-5 m-4 d-flex justify-content-center">
         <input type="file" name="csvFile" onChange={fileChange} />
       </div>
-      <div class="m-4 d-flex justify-content-center">
+      <div className="m-4 d-flex justify-content-center">
         <button
           onClick={uploadFile}
           type="button"
-          class="btn btn-primary btn-rounded btn-sm"
+          className="btn btn-primary btn-rounded btn-sm"
         >
           Upload
         </button>
