@@ -2,8 +2,9 @@ import { MDBBtn, MDBContainer, MDBRow } from "mdbreact";
 import React, { useState } from "react";
 import SelectBox from "./Input/SelectBox";
 import InputNum from "./Input/InputNum";
+import { tableColumns } from "../Table/Table";
 
-export default function QueryParam() {
+export default function QueryParam({ setTable }) {
   const sortOrderList = ["Ascending", "Descending"];
   const sortByList = ["id", "login", "name", "salary"];
 
@@ -24,7 +25,11 @@ export default function QueryParam() {
           sort: sort,
         })
     );
-    console.log(response);
+    const result = await response.json();
+    setTable({
+      columns: tableColumns,
+      rows: result.data,
+    });
   };
 
   return (

@@ -8,7 +8,7 @@ route.get("/", async (req, res) => {
   const validatedQuery = await validateQuery(req.query).catch((err) => {});
   const result = await readDB(validatedQuery);
   console.log(result);
-  res.json({ result: "Data Returned" });
+  res.json({ data: result });
 });
 
 module.exports = route;

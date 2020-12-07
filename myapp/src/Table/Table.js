@@ -2,146 +2,45 @@ import React, { useState } from "react";
 import { MDBCol, MDBContainer, MDBDataTableV5, MDBRow } from "mdbreact";
 import QueryParam from "../QueryParam/QueryParam";
 
+export const tableColumns = [
+  {
+    label: "Id",
+    field: "id",
+    width: 150,
+    attributes: {
+      "aria-controls": "DataTable",
+      "aria-label": "Name",
+    },
+  },
+  {
+    label: "Login",
+    field: "login",
+    width: 270,
+  },
+  {
+    label: "Name",
+    field: "name",
+    width: 200,
+  },
+  {
+    label: "Salary",
+    field: "salary",
+    sort: "disabled",
+    width: 100,
+  },
+];
+
 export default function Table() {
   const [datatable, setDatatable] = React.useState({
-    columns: [
-      {
-        label: "Id",
-        field: "id",
-        width: 150,
-        attributes: {
-          "aria-controls": "DataTable",
-          "aria-label": "Name",
-        },
-      },
-      {
-        label: "Login",
-        field: "login",
-        width: 270,
-      },
-      {
-        label: "Name",
-        field: "name",
-        width: 200,
-      },
-      {
-        label: "Salary",
-        field: "salary",
-        sort: "disabled",
-        width: 100,
-      },
-    ],
-    rows: [
-      {
-        id: "Tiger Nixon",
-        login: "System Architect",
-        name: "Edinburgh",
-        salary: "61",
-      },
-      {
-        id: "Tiger Nixon",
-        login: "System Architect",
-        name: "Edinburgh",
-        salary: "61",
-      },
-      {
-        id: "Tiger Nixon",
-        login: "System Architect",
-        name: "Edinburgh",
-        salary: "61",
-      },
-      {
-        id: "Tiger Nixon",
-        login: "System Architect",
-        name: "Edinburgh",
-        salary: "61",
-      },
-      {
-        id: "Tiger Nixon",
-        login: "System Architect",
-        name: "Edinburgh",
-        salary: "61",
-      },
-      {
-        id: "Tiger Nixon",
-        login: "System Architect",
-        name: "Edinburgh",
-        salary: "61",
-      },
-      {
-        id: "Tiger Nixon",
-        login: "System Architect",
-        name: "Edinburgh",
-        salary: "61",
-      },
-      {
-        id: "Tiger Nixon",
-        login: "System Architect",
-        name: "Edinburgh",
-        salary: "61",
-      },
-      {
-        id: "Tiger Nixon",
-        login: "System Architect",
-        name: "Edinburgh",
-        salary: "61",
-      },
-      {
-        id: "Tiger Nixon",
-        login: "System Architect",
-        name: "Edinburgh",
-        salary: "61",
-      },
-      {
-        id: "Tiger Nixon",
-        login: "System Architect",
-        name: "Edinburgh",
-        salary: "61",
-      },
-      {
-        id: "Tiger Nixon",
-        login: "System Architect",
-        name: "Edinburgh",
-        salary: "61",
-      },
-      {
-        id: "Tiger Nixon",
-        login: "System Architect",
-        name: "Edinburgh",
-        salary: "61",
-      },
-      {
-        id: "Tiger Nixon",
-        login: "System Architect",
-        name: "Edinburgh",
-        salary: "61",
-      },
-      {
-        id: "Tiger Nixon",
-        login: "System Architect",
-        name: "Edinburgh",
-        salary: "61",
-      },
-      {
-        id: "Tiger Nixon",
-        login: "System Architect",
-        name: "Edinburgh",
-        salary: "61",
-      },
-      {
-        id: "Tiger Nixon",
-        login: "System Architect",
-        name: "Edinburgh",
-        salary: "61",
-      },
-    ],
+    columns: tableColumns,
+    rows: [],
   });
 
   return (
     <div>
       <MDBContainer>
         <MDBRow className="d-flex justify-content-center">
-          <QueryParam />
+          <QueryParam setTable={setDatatable} />
         </MDBRow>
         <MDBRow>
           <MDBCol size="2"></MDBCol>
