@@ -1,7 +1,7 @@
 const express = require("express");
 const multer = require("multer");
 const validateCsv = require("../model/logic/validateCsv");
-const writeDB = require("../model/logic/crudDB");
+const { writeDB } = require("../model/logic/crudDB");
 
 const route = express.Router();
 const upload = multer();

@@ -34,4 +34,27 @@ const writeDB = (result) => {
   });
 };
 
-module.exports = writeDB;
+const readDB = (query) => {
+  return new Promise((resolve, reject) => {
+    const minSalary = query.minSalary;
+    const maxSalary = query.maxSalary;
+    const offset = query.offset;
+    const limit = query.limit;
+    const sortOrder = query.sortOrder;
+    const sortBy = query.sortBy;
+
+    Employee.find({
+      salary: { $gte: minSalary },
+      salary: { $lte: maxSalary },
+    })
+      .sort({ [sortBy]: sortOrder === "+" ? 1 : -1 })
+      .skip(offset)
+      .limit(limit)
+      .exec((err, result) => {
+        if (err) reject(err);
+        else resolve(result);
+      });
+  });
+};
+
+module.exports = { writeDB, readDB };
