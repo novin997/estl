@@ -11,7 +11,19 @@ const Employee = require("../schema/employee");
 function validateCsv(csvfile) {
   return new Promise((resolve, reject) => {
     const csv = splitEasy(csvfile);
-    const dataDB = { data: [], actions: [] };
+    let dataDB = { data: [], actions: [] };
+
+    /**
+     * Create 4 set to keep track of all the transaction that will cause duplicate
+     * @idSet when a new Id is added to db, the id will be placed in this set.
+     *        This is done so that there is no same id within the same csv.
+     * @removedLoginSet The login added in when there is an id found in the system
+     * @addedLoginSet The set will be inserted when there is a new employee added
+     *                or when there is an update to a present employee id
+     */
+    let idSet = new Set();
+    let removedLoginSet = new Set();
+    let addedLoginSet = new Set();
 
     console.log(csv);
 
@@ -37,6 +49,9 @@ function validateCsv(csvfile) {
               /**
                * Check if id is present in the database
                */
+              if (idSet.has(val[0])) reject("Duplicate Id in current csv file");
+              if (addedLoginSet.has(val[1]))
+                reject("Duplicate Login in current csv file");
               const duplicateId = await Employee.findOne({ id: val[0] });
               if (!duplicateId) {
                 dataDB.data.push({
@@ -45,22 +60,29 @@ function validateCsv(csvfile) {
                   name: val[2],
                   salary: val[3],
                 });
+                idSet.add(val[0]);
+                addedLoginSet.add(val[1]);
                 dataDB.actions.push("AddEmployee");
               } else {
                 /**
                  * if id is already present,
                  * we will check if there is any other user with the same login
                  */
+                if (addedLoginSet.has(val[1]))
+                  reject("Duplicated Login within the csv file");
                 const duplicateLogin = await Employee.findOne({
                   login: val[1],
                 });
-                if (!duplicateLogin) {
+                if (!duplicateLogin || removedLoginSet.has(val[1])) {
                   dataDB.data.push({
                     id: val[0],
                     login: val[1],
                     name: val[2],
                     salary: val[3],
                   });
+                  addedLoginSet.add(val[1]);
+                  removedLoginSet.add(duplicateId.login);
+                  removedLoginSet.delete(val[1]);
                   dataDB.actions.push("UpdateEmployee");
                 } else {
                   reject(
