@@ -9,7 +9,7 @@ const Employee = require("../schema/employee");
  */
 
 function validateCsv(csvfile) {
-  return new Promise((resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
     const csv = splitEasy(csvfile);
     let dataDB = { data: [], actions: [] };
 
@@ -29,7 +29,8 @@ function validateCsv(csvfile) {
 
     // https://stackoverflow.com/questions/19701502/how-to-improve-nested-if-else-statements
     // Try to improve the nested if else loop if there is time
-    const loop = csv.map(async (val, index) => {
+
+    for (const [index, val] of csv.entries()) {
       /**
        * Ignore the First Row
        */
@@ -63,6 +64,7 @@ function validateCsv(csvfile) {
                 idSet.add(val[0]);
                 addedLoginSet.add(val[1]);
                 dataDB.actions.push("AddEmployee");
+                console.log(index);
               } else {
                 /**
                  * if id is already present,
@@ -96,10 +98,11 @@ function validateCsv(csvfile) {
           console.log("comment");
         }
       }
-    });
-    Promise.all(loop).then(() => {
-      resolve(dataDB);
-    });
+    }
+    resolve(dataDB);
+    // Promise.all(loop).then(() => {
+    //   resolve(dataDB);
+    // });
   });
 }
 
