@@ -7,16 +7,16 @@ const route = express.Router();
 const upload = multer();
 
 route.post("/upload", upload.single("file"), async (req, res) => {
-  console.log(req.file);
   try {
     const csv = req.file.buffer.toString("utf8");
     const result = await validateCsv(csv);
     console.log(result);
     const status = await writeDB(result);
+    res.status(200).json({ message: "CSV File has been Upload Successfully." });
   } catch (err) {
     console.log(err);
+    res.status(400).json({ message: err });
   }
-  res.json({ msg: "Good result" });
 });
 
 module.exports = route;

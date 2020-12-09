@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 export default function Upload() {
   const [file, setFile] = useState("");
+  const [response, setResponse] = useState("");
 
   function fileChange(e) {
     const file = e.target.files[0];
@@ -23,9 +24,9 @@ export default function Upload() {
       });
 
       const data = await apiPost.json();
-      console.log(data);
+      setResponse(data.message);
     } catch (err) {
-      console.log("error");
+      setResponse(err);
     }
   }
 
@@ -45,6 +46,9 @@ export default function Upload() {
         >
           Upload
         </button>
+      </div>
+      <div className="m-4 d-flex justify-content-center">
+        <p>{response}</p>
       </div>
     </div>
   );

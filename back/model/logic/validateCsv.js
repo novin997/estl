@@ -11,6 +11,11 @@ const Employee = require("../schema/employee");
 function validateCsv(csvfile) {
   return new Promise(async (resolve, reject) => {
     const csv = splitEasy(csvfile);
+    console.log(csv);
+    if (csv.length <= 1) {
+      reject(`Empty csv file`);
+    }
+
     let dataDB = { data: [], actions: [] };
 
     /**
@@ -24,8 +29,6 @@ function validateCsv(csvfile) {
     let idSet = new Set();
     let removedLoginSet = new Set();
     let addedLoginSet = new Set();
-
-    console.log(csv);
 
     // https://stackoverflow.com/questions/19701502/how-to-improve-nested-if-else-statements
     // Try to improve the nested if else loop if there is time
@@ -50,11 +53,19 @@ function validateCsv(csvfile) {
               /**
                * Check if id is present in the database
                */
-              if (idSet.has(val[0])) reject("Duplicate Id in current csv file");
+              if (idSet.has(val[0]))
+                reject(`Duplicated id of ${val[0]} in the current csv file`);
               if (addedLoginSet.has(val[1]))
-                reject("Duplicate Login in current csv file");
+                reject(`Duplicated login of ${val[1]} in the current csv file`);
               const duplicateId = await Employee.findOne({ id: val[0] });
               if (!duplicateId) {
+                const duplicateLogin = await Employee.findOne({
+                  login: val[1],
+                });
+                if (duplicateLogin)
+                  reject(
+                    `The login value of ${val[1]} is already in the database`
+                  );
                 dataDB.data.push({
                   id: val[0],
                   login: val[1],
@@ -71,7 +82,9 @@ function validateCsv(csvfile) {
                  * we will check if there is any other user with the same login
                  */
                 if (addedLoginSet.has(val[1]))
-                  reject("Duplicated Login within the csv file");
+                  reject(
+                    `Duplicated login of ${val[1]} in the current csv file`
+                  );
                 const duplicateLogin = await Employee.findOne({
                   login: val[1],
                 });
@@ -88,12 +101,12 @@ function validateCsv(csvfile) {
                   dataDB.actions.push("UpdateEmployee");
                 } else {
                   reject(
-                    "Unable to update the Employee due to a duplicate in the login parameter"
+                    `The login value of ${val[1]} is already in the database`
                   );
                 }
               }
             } else reject(`Salary at Line ${index} is negative`);
-          } else reject("Invalid Columns in CSV File");
+          } else reject("Invalid number of columns in csv file");
         } else {
           console.log("comment");
         }
