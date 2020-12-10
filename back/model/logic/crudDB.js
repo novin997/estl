@@ -43,10 +43,12 @@ const readDB = (query) => {
     const sortOrder = query.sortOrder;
     const sortBy = query.sortBy;
 
+    console.log(minSalary);
+    console.log(maxSalary);
+
     Employee.find(
       {
-        salary: { $gte: minSalary },
-        salary: { $lte: maxSalary },
+        salary: { $gte: minSalary, $lte: maxSalary },
       },
       { _id: 0 },
       { __v: 0 }

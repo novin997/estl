@@ -15,6 +15,17 @@ export default function QueryParam({ setTable }) {
 
   const queryDB = async () => {
     const sort = (sortOrder === "Ascending" ? "+" : "-").concat(sortBy);
+    console.log(
+      "/users?" +
+        new URLSearchParams({
+          minSalary: minSalary,
+          maxSalary: maxSalary,
+          offset: 0,
+          limit: 30,
+          sort: sort,
+        })
+    );
+
     const response = await fetch(
       "/users?" +
         new URLSearchParams({

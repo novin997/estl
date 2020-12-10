@@ -5,6 +5,18 @@
  */
 const validateQuery = (query) => {
   return new Promise((resolve, reject) => {
+    if (!query.hasOwnProperty("minSalary"))
+      reject("Missing parameter of minSalary");
+
+    if (!query.hasOwnProperty("maxSalary"))
+      reject("Missing parameter of maxSalary");
+
+    if (!query.hasOwnProperty("offset")) reject("Missing parameter of offset");
+
+    if (!query.hasOwnProperty("limit")) reject("Missing parameter of limit");
+
+    if (!query.hasOwnProperty("sort")) reject("Missing parameter of sort");
+
     const minSalary = Number(query.minSalary);
     const maxSalary = Number(query.maxSalary);
     const offset = Number(query.offset);
@@ -13,16 +25,16 @@ const validateQuery = (query) => {
     const sortBy = query.sort.substring(1);
 
     // Check if minSalary is Number
-    if (typeof minSalary !== "number") reject("minSalary is not a Number");
+    if (isNaN(minSalary)) reject("minSalary is not a Number");
 
     // Check if maxSalary is Number
-    if (typeof maxSalary !== "number") reject("maxSalary is not a Number");
+    if (isNaN(maxSalary)) reject("maxSalary is not a Number");
 
     if (minSalary > maxSalary)
       reject("Invalid query as the minSalary is more than maxSalary");
 
     if (!(sortOrder === "+" || sortOrder === "-"))
-      reject("SortOrder query is invalid");
+      reject("Sort query is invalid");
 
     if (
       !(
@@ -32,7 +44,7 @@ const validateQuery = (query) => {
         sortBy === "salary"
       )
     )
-      reject("SortOrder query is invalid");
+      reject("Sort column is invalid");
 
     resolve({
       minSalary: minSalary,

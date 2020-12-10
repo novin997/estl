@@ -6,7 +6,9 @@ const route = express.Router();
 
 route.get("/", async (req, res) => {
   console.log(req.query);
-  const validatedQuery = await validateQuery(req.query);
+  const validatedQuery = await validateQuery(req.query).catch((err) => {
+    res.status(400).json({ message: err });
+  });
   const result = await readDB(validatedQuery);
   console.log(result);
   res.status(200).json({ results: result });
