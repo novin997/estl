@@ -50,7 +50,7 @@ export default function QueryParam({ setTable }) {
           <InputNum title="MinSalary" val={minSalary} setVal={setMinSalary} />
           <InputNum title="MaxSalary" val={maxSalary} setVal={setMaxSalary} />
         </MDBRow>
-        <div className="d-flex justify-content-center">
+        <div className="pr-5 d-flex justify-content-center">
           <SelectBox
             title="Sort Order"
             list={sortOrderList}
@@ -64,7 +64,7 @@ export default function QueryParam({ setTable }) {
             setVal={setSortBy}
           />
         </div>
-        <div className="d-flex justify-content-center">
+        <div className="m-4 d-flex justify-content-center">
           <MDBBtn onClick={queryDB} color="dark">
             QueryDB
           </MDBBtn>
