@@ -25,10 +25,10 @@ export default function QueryParam({ setTable }) {
           sort: sort,
         })
     );
-    const result = await response.json();
+    const table = await response.json();
     setTable({
       columns: tableColumns,
-      rows: result.data,
+      rows: table.results,
     });
   };
 

@@ -23,3 +23,5 @@ mongoose.connect(
     console.log("Connected to MongoDB");
   }
 );
+
+module.exports = app;

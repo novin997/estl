@@ -9,6 +9,7 @@ const upload = multer();
 route.post("/upload", upload.single("file"), async (req, res) => {
   try {
     const csv = req.file.buffer.toString("utf8");
+    console.log(req.file);
     const result = await validateCsv(csv);
     console.log(result);
     const status = await writeDB(result);

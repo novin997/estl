@@ -15,6 +15,7 @@ export default function Upload() {
 
   async function uploadFile() {
     const formData = new FormData();
+    console.log(file);
     formData.append("file", file);
 
     try {
