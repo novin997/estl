@@ -66,6 +66,7 @@ describe("/GET /users", () => {
           done();
         });
     });
+
     it("Return Employee have salary betweem 0-4000 and sorted Ascending by login", (done) => {
       chai
         .request(server)
@@ -107,6 +108,7 @@ describe("/GET /users", () => {
           done();
         });
     });
+
     it("Return Employee have salary betweem 0-4000 and sorted Ascending by name", (done) => {
       chai
         .request(server)
@@ -146,6 +148,7 @@ describe("/GET /users", () => {
           done();
         });
     });
+
     it("Return Employee have salary betweem 0-4000 and sorted Ascending by salary", (done) => {
       chai
         .request(server)
@@ -187,6 +190,7 @@ describe("/GET /users", () => {
           done();
         });
     });
+
     it("Return Employee have salary betweem 2000-3500 and sorted Desc by id", (done) => {
       chai
         .request(server)
@@ -209,6 +213,7 @@ describe("/GET /users", () => {
           done();
         });
     });
+
     it("Return Employee have salary betweem 2000-3500 and sorted Ascending by id", (done) => {
       chai
         .request(server)
@@ -247,6 +252,7 @@ describe("/GET /users", () => {
           done();
         });
     });
+
     it("Missing maxSalary param", (done) => {
       chai
         .request(server)
@@ -257,6 +263,7 @@ describe("/GET /users", () => {
           done();
         });
     });
+
     it("Missing offset param", (done) => {
       chai
         .request(server)
@@ -267,6 +274,7 @@ describe("/GET /users", () => {
           done();
         });
     });
+
     it("Missing limit param", (done) => {
       chai
         .request(server)
@@ -277,6 +285,7 @@ describe("/GET /users", () => {
           done();
         });
     });
+
     it("Missing sort param", (done) => {
       chai
         .request(server)
@@ -287,6 +296,7 @@ describe("/GET /users", () => {
           done();
         });
     });
+
     it("minSalary not a Number", (done) => {
       chai
         .request(server)
@@ -297,6 +307,7 @@ describe("/GET /users", () => {
           done();
         });
     });
+
     it("maxSalary not a Number", (done) => {
       chai
         .request(server)
@@ -307,6 +318,7 @@ describe("/GET /users", () => {
           done();
         });
     });
+
     it("maxSalary < minSalary", (done) => {
       chai
         .request(server)
@@ -321,6 +333,7 @@ describe("/GET /users", () => {
           done();
         });
     });
+
     it("Invalid sort Params", (done) => {
       chai
         .request(server)
@@ -331,6 +344,7 @@ describe("/GET /users", () => {
           done();
         });
     });
+
     it("Invalid sort params", (done) => {
       chai
         .request(server)

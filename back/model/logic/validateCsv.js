@@ -62,7 +62,7 @@ function validateCsv(csvfile) {
                 const duplicateLogin = await Employee.findOne({
                   login: val[1],
                 });
-                if (duplicateLogin)
+                if (duplicateLogin && !removedLoginSet.has(val[1]))
                   reject(
                     `The login value of ${val[1]} is already in the database`
                   );
@@ -113,9 +113,6 @@ function validateCsv(csvfile) {
       }
     }
     resolve(dataDB);
-    // Promise.all(loop).then(() => {
-    //   resolve(dataDB);
-    // });
   });
 }
 

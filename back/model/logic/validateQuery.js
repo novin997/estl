@@ -30,6 +30,12 @@ const validateQuery = (query) => {
     // Check if maxSalary is Number
     if (isNaN(maxSalary)) reject("maxSalary is not a Number");
 
+    // Check if offset is Number
+    if (isNaN(offset)) reject("offset is not a Number");
+
+    // Check if minSalary is Number
+    if (isNaN(limit)) reject("limit is not a Number");
+
     if (minSalary > maxSalary)
       reject("Invalid query as the minSalary is more than maxSalary");
 
